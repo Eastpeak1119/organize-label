@@ -97,6 +97,18 @@ def process_excel(uploaded_file):
         df_grouped['CTN_Numeric'] = pd.to_numeric(df_grouped['CTN'], errors='coerce')
         df_grouped = df_grouped.sort_values('CTN_Numeric').drop(columns=['CTN_Numeric'])
 
+        # Format CTN to remove .0 if it's an integer
+        def clean_ctn(val):
+            try:
+                f = float(val)
+                if f.is_integer():
+                    return str(int(f))
+            except (ValueError, TypeError):
+                pass
+            return str(val)
+            
+        df_grouped['CTN'] = df_grouped['CTN'].apply(clean_ctn)
+
         return df_grouped, output_filename, None
         
     except Exception as e:
