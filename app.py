@@ -117,7 +117,7 @@ def process_excel(uploaded_file):
 def main():
     st.set_page_config(page_title="Excel Processor", layout="wide")
     
-    st.title("Excel Data Processor")
+    st.title("麥頭檔案轉換")
     st.write("Upload your Excel file to process it based on the defined logic.")
     
     uploaded_file = st.file_uploader("Choose an Excel file", type=['xlsx'])
